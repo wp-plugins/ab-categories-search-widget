@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AB Categories Search Widget\n"
+"POT-Creation-Date: 2013-09-19 20:01-0300\n"
+"PO-Revision-Date: 2013-09-19 20:11-0300\n"
+"Last-Translator: Agustín Berasategui <ajberasategui@gmail.com>\n"
+"Language-Team: Agustin Berasategui <ajberasategui@gmail.com>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: __;_e;_;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: ../ab-category-search.php:33
+msgid "AB Search Categories"
+msgstr "AB Búsqueda con Categorías"
+
+#: ../ab-category-search.php:35
+msgid "Adds a Search Form with category selectors"
+msgstr "Agrega un widget de búsqueda con selectores de categoría"
+
+#: ../ab-category-search.php:57 ../ab-category-search.php:58
+#: ../ab-category-search.php:59 ../ab-category-search.php:84
+msgid "Search"
+msgstr "Buscar"
+
+#: ../ab-category-search.php:65
+msgid "All"
+msgstr "Todo"
+
+#: ../ab-category-search.php:135
+msgid "Title"
+msgstr "Título"
+
+#: ../ab-category-search.php:141
+msgid "Categories"
+msgstr "Categorías"

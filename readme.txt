@@ -1,0 +1,41 @@
+=== AB Categories Search Widget ===
+Contributors: Agustin Berasategui
+Donate link: http://ajberasategui.com.ar/donate/
+Tags: widget, sidebar, search, form, categories, multiple
+Requires at least: 3.5
+Tested up to: 3.6
+Stable tag: 0.1
+License: GPLv2
+
+Insert a search form widget that allows visitors to add category filters to the search query.
+
+== Description ==
+
+This plugin provides a Search Widget similar to the default WordPress one but with the abilty of adding category select 
+lists to restrict the search query to only those categories.
+
+== Changelog ==
+
+= 0.1 =
+* 2013.09.19 first release.
+
+== Installation ==
+
+1. Upload this plugin to your Wordpress plugin directory( generally wp-content/plugins/ ).
+2. Activate it in admin area.
+3. Insert the AB Search Widget and choose the parent categories to add to form.
+
+== Screenshots ==
+
+1. Widget configuration options.
+2. Default widget appearance inserted on a theme.
+
+== Frequently Asked Questions ==
+
+None right now.
+
+= Known problems =
+
+== Upgrade Notice == 
+
+None
