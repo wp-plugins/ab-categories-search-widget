@@ -14,6 +14,8 @@ Insert a search form widget that allows visitors to add category filters to the 
 This plugin provides a Search Widget similar to the default WordPress one but with the abilty of adding category select 
 lists to restrict the search query to only those categories.
 
+Any comments, reviews, support questions are very much welcome!!! 
+
 == Changelog ==
 
 = 0.1 =
