@@ -61,7 +61,8 @@ class ABCategorySearch  extends WP_Widget {
 				<?php foreach( $instance['categories'] as $name => $cat_id ) : ?>
 					<label for="<?php echo $this->id; ?>_cat_sel"><?php echo $name; ?></label>
 					<select name="search_cat[]" id="<?php echo $this->id; ?>_cat_sel">
-						<option value="0" <?php selected( true, in_array(0, $incoming_search_cats ) ); ?>>
+						<option value="<?php echo $cat_id; ?>" 
+							<?php selected( true, in_array($cat_id, $incoming_search_cats ) ); ?>>
 							<?php _e( 'All', 'absc' ); ?>
 						</option>
 						<?php
