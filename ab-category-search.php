@@ -4,7 +4,7 @@ Plugin Name: AB Categories Search Widget
 Plugin URI: 
 Description: Provides a Search Widget with the ability to add category selection filters.
 Author: Agustin Berasategui
-Version: 0.1
+Version: 0.1.1
 Author URI: ajberasategui.com.ar
 */
 /*
