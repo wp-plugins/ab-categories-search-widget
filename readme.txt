@@ -18,6 +18,12 @@ Any comments, reviews, support questions are very much welcome!!!
 
 == Changelog ==
 
+= 0.2 = 
+* 2013.11.21
+
+The widget has been modified so you can choose the search login between categories. Now you can choose to search 
+posts that belongs to every category select or posts that belongs to one of the selected categories at least.
+
 = 0.1.1 = 
 
 Modified to search by default in top parent categories.

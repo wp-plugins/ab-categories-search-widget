@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: absc\n"
-"POT-Creation-Date: 2013-09-19 20:29-0300\n"
-"PO-Revision-Date: 2013-09-19 20:29-0300\n"
+"POT-Creation-Date: 2013-11-21 17:36-0300\n"
+"PO-Revision-Date: 2013-11-21 17:41-0300\n"
 "Last-Translator: Agustín Berasategui <ajberasategui@gmail.com>\n"
 "Language-Team: Agustin Berasategui\n"
 "MIME-Version: 1.0\n"
@@ -15,31 +15,99 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPath-1: .\n"
 
-#: ../ab-category-search.php:33
+#: ../ab-category-search.php:34 ../trunk/ab-category-search.php:33
 msgid "AB Search Categories"
 msgstr "AB Búsqueda con Categorías"
 
-#: ../ab-category-search.php:35
+#: ../ab-category-search.php:36 ../trunk/ab-category-search.php:35
 msgid "Adds a Search Form with category selectors"
 msgstr "Agrega un widget de búsqueda con selectores de categoría"
 
-#: ../ab-category-search.php:57 ../ab-category-search.php:58
-#: ../ab-category-search.php:59 ../ab-category-search.php:84
+#: ../ab-category-search.php:50
+msgid "and"
+msgstr "y"
+
+#: ../ab-category-search.php:50
+msgid "or"
+msgstr "o"
+
+#: ../ab-category-search.php:56 ../ab-category-search.php:57
+#: ../ab-category-search.php:58 ../ab-category-search.php:89
+#: ../trunk/ab-category-search.php:57 ../trunk/ab-category-search.php:58
+#: ../trunk/ab-category-search.php:59 ../trunk/ab-category-search.php:85
 msgid "Search"
 msgstr "Buscar"
 
-#: ../ab-category-search.php:65
+#: ../ab-category-search.php:70 ../trunk/ab-category-search.php:66
 msgid "All"
 msgstr "Todo"
 
-#: ../ab-category-search.php:135
+#: ../ab-category-search.php:140 ../trunk/ab-category-search.php:136
 msgid "Title"
 msgstr "Título"
 
-#: ../ab-category-search.php:141
+#: ../ab-category-search.php:146 ../trunk/ab-category-search.php:142
 msgid "Categories"
 msgstr "Categorías"
 
-#: ../ab-category-search.php:153
+#: ../ab-category-search.php:158 ../trunk/ab-category-search.php:154
 msgid "Use ctrl (or cmd) + click to select multiple categories."
 msgstr "Usa ctrl (o cmd en MAC) + click para seleccionar más de una categoría."
+
+#: ../ab-category-search.php:162
+msgid "Mode"
+msgstr "Modo"
+
+#: ../ab-category-search.php:167
+msgid "AND"
+msgstr "Y"
+
+#: ../ab-category-search.php:170
+msgid "OR"
+msgstr "O"
+
+#: ../ab-category-search.php:175
+msgid ""
+"This option defines how the search works. If you choose AND it <br/>will be "
+"searched\n"
+"\t\t\t\t\t the posts that are simultaneously in all the selected <br/> "
+"categories. If you choose OR, it will be \n"
+"\t\t\t\t\t searched the posts that <br/>are at least in one of the selected "
+"categories."
+msgstr ""
+"Esta opción define el comportamiento de la búsqueda. Eligiendo la opción \"Y"
+"\" <br/>la búsqueda se realizará entre las entradas que pertenezcan "
+"simultáneamente a<br/>todas las categorías seleccionadas. Con la opción \"O"
+"\" la búsqueda incluirá aquellas<br/>entradas que pertenecen al menos a una "
+"de las categorías seleccionadas."
+
+#: ../ab-category-search.php:183
+msgid ""
+"Please <b>notice</b> that when using \"and mode\" the search will be<br/>\n"
+"\t\t\tdone against posts which strictly belongs to selected categories in "
+"the<br/>\n"
+"\t\t\tsearch widget. For example, lets say you have posts about bycicles<br/"
+">\n"
+"\t\t\tand have the following categories: Condition with new and used as "
+"subcategories<br/>\n"
+"\t\t\tand colour with blue and white as subcategories. When a visitor"
+"\tsearches for<br/>\n"
+"\t\t\tkeyword \"alterrain\" and selects All for condition and All for colour "
+"he will<br/>\n"
+"\t\t\tobtain the bycicle posts which are marked as belongin to the general "
+"categories<br/>\n"
+"\t\t\t\"condition\" and \"colour\". If they belong to \"white\" but not to "
+"\"Colour\" they will<br/>\n"
+"\t\t\tbe not displayed in the result."
+msgstr ""
+"Por favor, tenga en cuenta que usando el modo Y la búsqueda se realizará<br/"
+">entre aquellas entradas que pertenecen estrictamente a las categorías que "
+"se <br/>seleccionen al realizar la búsqueda.  Por ejemplo, si Ud. tiene "
+"entradas referidas<br/>a bicicletas y cuenta con las categorías: Condición y "
+"Color, las cuáles tienen a su vez<br/>las subcategorías \"Nueva, Usada\" y "
+"\"Blanco, Azul\" respectivamente, cuando un <br/>visitante busque la palabra "
+"\"todoterreno\" y selecciona Todo para la Condición y Todo<br/>para color, "
+"la búsqueda se hará entre las entradas que pertenezcan a las categorías "
+"generales<br/>\"Condición\" y \"Color\". Si una entrada pertenece por "
+"ejemplo a Blanco y Usada pero no está<br/>marcada como perteneciente a "
+"Condición y Color no aparecerá en el resultado."

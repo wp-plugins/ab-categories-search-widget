@@ -1,10 +1,11 @@
 <?php
+
 /*
 Plugin Name: AB Categories Search Widget
 Plugin URI: 
 Description: Provides a Search Widget with the ability to add category selection filters.
 Author: Agustin Berasategui
-Version: 0.1.1
+Version: 0.1.2
 Author URI: ajberasategui.com.ar
 */
 /*
@@ -44,24 +45,27 @@ class ABCategorySearch  extends WP_Widget {
 		if ( $title ) {
 			echo $before_title . $title . $after_title;
 		}
-		$incoming_search_cats = ( isset( $_GET['search_cat'] ) ) ? (array) $_GET['search_cat'] : array( 'empty' );
+		$incoming_search_cats = ( isset( $_GET['absc_search_cat'] ) ) ? (array) $_GET['absc_search_cat'] : array( 'empty' );
+		$mode = $instance['mode'];
+		$connector = ( 'and' == $mode || '' == $mode ) ? __( 'and', 'absc' ) : __( 'or', 'absc' ); 
 		?>
-		
-		<!--
-		<pre>
-			<?php print_r( $instance['categories'] ); ?>
-		</pre>-->
 		<div class="ab-cat-search-container">
 			<form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
+				<input type="hidden" name="absc_mode" value="<?php echo $mode; ?>" />
 				<label>
 					<span class="screen-reader-text"><?php _e( 'Search', 'absc' ); ?>:</span>
 					<input type="search" class="search-field" placeholder="<?php _e( 'Search', 'absc' ); ?>..." 
-					value="" name="s" title="<?php _e( 'Search', 'absc' ); ?>" />
+					value="<?php echo @$_GET['s']; ?>" name="s" title="<?php _e( 'Search', 'absc' ); ?>" />
 				</label><br/>
+				<?php $i = 0; ?>
 				<?php foreach( $instance['categories'] as $name => $cat_id ) : ?>
+					<?php 
+					if ( 0 != $i ) echo '<small>'.$connector.'</small><br/>';
+					$i++;
+					?> 
 					<label for="<?php echo $this->id; ?>_cat_sel"><?php echo $name; ?></label>
-					<select name="search_cat[]" id="<?php echo $this->id; ?>_cat_sel">
-						<option value="<?php echo 0; //$cat_id; ?>" 
+					<select name="absc_search_cat[]" id="<?php echo $this->id; ?>_cat_sel">
+						<option value="<?php echo $cat_id; ?>" 
 							<?php selected( true, in_array( $cat_id, $incoming_search_cats ) ); ?>>
 							<?php _e( 'All', 'absc' ); ?>
 						</option>
@@ -80,7 +84,7 @@ class ABCategorySearch  extends WP_Widget {
 							<?php echo $sc->name; ?>
 						</option>					 
 						<?php endforeach; ?>			
-				</select><br/>
+				</select>
 				<?php endforeach; ?>
 				<input type="submit" class="search-submit" value="<?php _e( 'Search', 'absc' ); ?>" />
 			</form>	
@@ -91,7 +95,7 @@ class ABCategorySearch  extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		foreach ( array('title') as $val ) {
+		foreach ( array('title', 'mode' ) as $val ) {
 			$instance[$val] = strip_tags( $new_instance[$val] );
 		}
 		$cats = array();
@@ -151,7 +155,41 @@ class ABCategorySearch  extends WP_Widget {
 				</option>
 				<?php endforeach; ?>
 			</select><br/>
-			<small><?php _e( 'Use ctrl (or cmd) + click to select multiple categories.', 'absc' ); ?></small>
+			<small><?php _e( 'Use ctrl (or cmd) + click to select multiple categories.', 'absc' ); ?></small>			
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'mode' ); ?>">
+				<?php _e( 'Mode', 'absc' ); ?>:
+			</label><br/>
+			<select name="<?php echo $this->get_field_name( 'mode' ); ?>" 
+				id="<?php echo $this->get_field_id( 'mode' ); ?>">
+				<option value="and" <?php selected( 'and', $instance['mode'], true ); ?>>
+					<?php _e( 'AND', 'absc' ); ?>
+				</option>
+				<option value="or" <?php selected( 'or', $instance['mode'], true ); ?>>
+					<?php _e( 'OR', 'absc' ); ?>
+				</option>
+			</select><br/>
+			<p style="text-align:justify">				
+				<small>
+					<?php _e( 'This option defines how the search works. If you choose AND it <br/>will be searched
+					 the posts that are simultaneously in all the selected <br/> categories. If you choose OR, it will be 
+					 searched the posts that <br/>are at least in one of the selected categories.', 'absc' ); ?>
+				</small>
+			</p>
+		</p>
+		<p>
+			<small>
+			<?php _e( 'Please <b>notice</b> that when using "and mode" the search will be<br/>
+			done against posts which strictly belongs to selected categories in the<br/>
+			search widget. For example, lets say you have posts about bycicles<br/>
+			and have the following categories: Condition with new and used as subcategories<br/>
+			and colour with blue and white as subcategories. When a visitor	searches for<br/>
+			keyword "alterrain" and selects All for condition and All for colour he will<br/>
+			obtain the bycicle posts which are marked as belongin to the general categories<br/>
+			"condition" and "colour". If they belong to "white" but not to "Colour" they will<br/>
+			be not displayed in the result.', 'absc' ); ?>
+			</small>
 		</p>
 	<?php 
 	}
@@ -168,21 +206,23 @@ function register_ab_cat_search_widget() {
 }
 add_action( 'widgets_init', 'register_ab_cat_search_widget' );
 
-function abcs_search_request( $wp_query ) {
-	if ( !isset( $_GET['search_cat'] ) ) return $vars; // if searching from default form do nothing.
+function abcs_search_request( $wp_query ) {	
+	if ( !isset( $_GET['absc_search_cat'] ) ) return $vars; // if searching from default form do nothing.
 	$cats = array();
-	foreach( $_GET['search_cat'] as $cat ) {
+	
+	foreach( $_GET['absc_search_cat'] as $cat ) {
 		if ( 0 != $cat )
 			$cats[] = $cat;
 	}
-	if ( !empty( $cats ) )
-		set_query_var( 'category__and', $cats );
-	/*
-	if ( isset( $_GET['search_cat'] ) ) {
-		echo '<pre>';
-		print_r( $wp_query->query_vars );
-		echo '</pre>';
-	}*/
+	if ( !empty( $cats ) ) {
+		if ( '' == $_GET['absc_mode'] || 'and' == $_GET['absc_mode'] ) {
+			//array_shift( $_GET['absc_search_cat'] );
+			set_query_var( 'category__and', $cats );	
+			//set_query_var( 'cat', implode( ',', $cats ) );
+		} else {
+			set_query_var( 'category__in', $cats );
+		}
+	}
+	return $wp_query;
 }
-add_filter( 'pre_get_posts', 'abcs_search_request' );
 ?>
