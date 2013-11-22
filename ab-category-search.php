@@ -51,12 +51,12 @@ class ABCategorySearch  extends WP_Widget {
 		?>
 		<div class="ab-cat-search-container">
 			<form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
-				<input type="hidden" name="absc_mode" value="<?php echo $mode; ?>" />
 				<label>
 					<span class="screen-reader-text"><?php _e( 'Search', 'absc' ); ?>:</span>
 					<input type="search" class="search-field" placeholder="<?php _e( 'Search', 'absc' ); ?>..." 
 					value="<?php echo @$_GET['s']; ?>" name="s" title="<?php _e( 'Search', 'absc' ); ?>" />
 				</label><br/>
+				<input type="hidden" name="absc_mode" value="<?php echo $mode; ?>" />
 				<?php $i = 0; ?>
 				<?php foreach( $instance['categories'] as $name => $cat_id ) : ?>
 					<?php 
@@ -207,22 +207,26 @@ function register_ab_cat_search_widget() {
 add_action( 'widgets_init', 'register_ab_cat_search_widget' );
 
 function abcs_search_request( $wp_query ) {	
-	if ( !isset( $_GET['absc_search_cat'] ) ) return $vars; // if searching from default form do nothing.
-	$cats = array();
+	if ( !isset( $_GET['absc_search_cat'] ) ) return $wp_query; // if searching from default form do nothing.
 	
+	$cats = array();
 	foreach( $_GET['absc_search_cat'] as $cat ) {
 		if ( 0 != $cat )
 			$cats[] = $cat;
 	}
 	if ( !empty( $cats ) ) {
+		if ( FALSE !== $uncat )
+			set_query_var( 'category__not_in', array( $uncat->cat_ID ) );
+		set_query_var( 'post_type', array( 'post' ) );
 		if ( '' == $_GET['absc_mode'] || 'and' == $_GET['absc_mode'] ) {
 			//array_shift( $_GET['absc_search_cat'] );
-			set_query_var( 'category__and', $cats );	
+			set_query_var( 'category__and', $cats );
 			//set_query_var( 'cat', implode( ',', $cats ) );
 		} else {
-			set_query_var( 'category__in', $cats );
+			set_query_var( 'category__in', $cats );			
 		}
 	}
 	return $wp_query;
 }
+add_action( 'pre_get_posts', 'abcs_search_request' );
 ?>
