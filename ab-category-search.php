@@ -5,7 +5,7 @@ Plugin Name: AB Categories Search Widget
 Plugin URI: 
 Description: Provides a Search Widget with the ability to add category selection filters.
 Author: Agustin Berasategui
-Version: 0.1.2
+Version: 0.2.1
 Author URI: ajberasategui.com.ar
 */
 /*
@@ -54,7 +54,8 @@ class ABCategorySearch  extends WP_Widget {
 				<label>
 					<span class="screen-reader-text"><?php _e( 'Search', 'absc' ); ?>:</span>
 					<input type="search" class="search-field" placeholder="<?php _e( 'Search', 'absc' ); ?>..." 
-					value="<?php echo @$_GET['s']; ?>" name="s" title="<?php _e( 'Search', 'absc' ); ?>" />
+					value="<?php echo @$_GET['s']; ?>" name="s" title="<?php _e( 'Search', 'absc' ); ?>" 
+					 id="absc-search-text" />
 				</label><br/>
 				<input type="hidden" name="absc_mode" value="<?php echo $mode; ?>" />
 				<?php $i = 0; ?>
@@ -86,7 +87,7 @@ class ABCategorySearch  extends WP_Widget {
 						<?php endforeach; ?>			
 				</select>
 				<?php endforeach; ?>
-				<input type="submit" class="search-submit" value="<?php _e( 'Search', 'absc' ); ?>" />
+				<input type="submit" class="search-submit" id="absc-search-submit" value="<?php _e( 'Search', 'absc' ); ?>" />
 			</form>	
 		</div>
 		<?php
@@ -206,27 +207,42 @@ function register_ab_cat_search_widget() {
 }
 add_action( 'widgets_init', 'register_ab_cat_search_widget' );
 
-function abcs_search_request( $wp_query ) {	
+function abcs_search_request( $wp_query ) {
+	// Is searching from our widget?	
 	if ( !isset( $_GET['absc_search_cat'] ) ) return $wp_query; // if searching from default form do nothing.
 	
+	add_filter( 'template_include', 'get_search_template' );
+	
+	// Generate an array containing the list of selected categories.
 	$cats = array();
 	foreach( $_GET['absc_search_cat'] as $cat ) {
 		if ( 0 != $cat )
 			$cats[] = $cat;
-	}
-	if ( !empty( $cats ) ) {
+	}	
+	//If categories were found
+	if ( !empty( $cats ) ) {			
+		//If uncategorized was found remove it from query.
 		if ( FALSE !== $uncat )
 			set_query_var( 'category__not_in', array( $uncat->cat_ID ) );
+		
+		// Set post_type to post to exclude pages.
 		set_query_var( 'post_type', array( 'post' ) );
-		if ( '' == $_GET['absc_mode'] || 'and' == $_GET['absc_mode'] ) {
+		
+		if ( '' == $_GET['absc_mode'] || 'and' == $_GET['absc_mode'] ) { //Mode is 'and' or default (and)
 			//array_shift( $_GET['absc_search_cat'] );
 			set_query_var( 'category__and', $cats );
 			//set_query_var( 'cat', implode( ',', $cats ) );
-		} else {
-			set_query_var( 'category__in', $cats );			
+		} else { // Mode is or
+			//set_query_var( 'category__in', $cats );
+			set_query_var( 'cat', implode( ',', $cats ) );
 		}
 	}
 	return $wp_query;
 }
 add_action( 'pre_get_posts', 'abcs_search_request' );
+
+function abcs_enqueue_front_scripts() {
+	wp_enqueue_script( 'abcs-main', WP_PLUGIN_URL .'/ab-categories-search-widget/js/main.js', array( 'jquery' ) );
+}
+//add_action( 'wp_enqueue_scripts', 'abcs_enqueue_front_scripts' );
 ?>

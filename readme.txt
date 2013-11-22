@@ -18,6 +18,13 @@ Any comments, reviews, support questions are very much welcome!!!
 
 == Changelog ==
 
+= 0.2.1 = 
+* 2013.11.22
+
+Added the feature that when searching for empty string (just to filter by categories) it will use the search template.
+Some bug fixes.
+
+
 = 0.2 = 
 * 2013.11.21
 
