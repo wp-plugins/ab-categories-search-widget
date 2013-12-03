@@ -5,7 +5,7 @@ Plugin Name: AB Categories Search Widget
 Plugin URI: 
 Description: Provides a Search Widget with the ability to add category selection filters.
 Author: Agustin Berasategui
-Version: 0.2.2
+Version: 0.2.3
 Author URI: ajberasategui.com.ar
 */
 /*
@@ -64,7 +64,7 @@ class ABCategorySearch  extends WP_Widget {
 					if ( 0 != $i ) echo '<small>'.$connector.'</small><br/>';
 					$i++;
 					?> 
-					<label for="<?php echo $this->id; ?>_cat_sel"><?php echo $name; ?></label>
+					<label class="abcs_cat_label" for="<?php echo $this->id; ?>_cat_sel"><?php echo $name; ?></label>
 					<select name="absc_search_cat[]" id="<?php echo $this->id; ?>_cat_sel">
 						<option value="<?php echo $cat_id; ?>" 
 							<?php selected( true, in_array( $cat_id, $incoming_search_cats ) ); ?>>

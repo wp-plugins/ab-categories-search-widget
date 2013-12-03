@@ -4,7 +4,7 @@ Donate link: http://ajberasategui.com.ar/donate/
 Tags: widget, sidebar, search, form, categories, multiple
 Requires at least: 3.5
 Tested up to: 3.7
-Stable tag: 0.2.2
+Stable tag: 0.2.3
 License: GPLv2
 
 Insert a search form widget that allows visitors to add category filters to the search query.
@@ -17,6 +17,11 @@ lists to restrict the search query to only those categories.
 Any comments, reviews, support questions are very much welcome!!! 
 
 == Changelog ==
+
+= 0.2.3 = 
+* 2013.12.03
+
+Added classes to category labels.
 
 = 0.2.2 = 
 * 2013.11.22
