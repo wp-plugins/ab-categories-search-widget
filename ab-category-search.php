@@ -5,7 +5,7 @@ Plugin Name: AB Categories Search Widget
 Plugin URI: 
 Description: Provides a Search Widget with the ability to add category selection filters.
 Author: Agustin Berasategui
-Version: 0.2.3
+Version: 0.2.4
 Author URI: ajberasategui.com.ar
 */
 /*
@@ -42,6 +42,8 @@ class ABCategorySearch  extends WP_Widget {
 		extract( $args );
 		echo $before_widget;
 		$title = apply_filters('widget_title', $instance['title'] );
+		$hide_op = ( $instance['hide_op'] != 'off' && $instance['hide_op'] != '' );
+		
 		if ( $title ) {
 			echo $before_title . $title . $after_title;
 		}
@@ -52,7 +54,7 @@ class ABCategorySearch  extends WP_Widget {
 		<div class="ab-cat-search-container">
 			<form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
 				<label>
-					<span class="screen-reader-text"><?php _e( 'Search', 'absc' ); ?>:</span>
+					<span id="absc-search-label" class="screen-reader-text"><?php _e( 'Search', 'absc' ); ?>:</span>
 					<input type="search" class="search-field" placeholder="<?php _e( 'Search', 'absc' ); ?>..." 
 					value="<?php echo @$_GET['s']; ?>" name="s" title="<?php _e( 'Search', 'absc' ); ?>" 
 					 id="absc-search-text" />
@@ -61,7 +63,7 @@ class ABCategorySearch  extends WP_Widget {
 				<?php $i = 0; ?>
 				<?php foreach( $instance['categories'] as $name => $cat_id ) : ?>
 					<?php 
-					if ( 0 != $i ) echo '<small>'.$connector.'</small><br/>';
+					if ( 0 != $i && !$hide_op ) echo '<small>'.$connector.'</small><br/>';
 					$i++;
 					?> 
 					<label class="abcs_cat_label" for="<?php echo $this->id; ?>_cat_sel"><?php echo $name; ?></label>
@@ -96,7 +98,7 @@ class ABCategorySearch  extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		foreach ( array('title', 'mode' ) as $val ) {
+		foreach ( array('title', 'mode', 'hide_op' ) as $val ) {
 			$instance[$val] = strip_tags( $new_instance[$val] );
 		}
 		$cats = array();
@@ -141,7 +143,7 @@ class ABCategorySearch  extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( "Title", 'absc' ); ?>:</label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" 
 				name="<?php echo $this->get_field_name( 'title' ); ?>" 
-				value="<?php echo $instance['title']; ?>" style="width:100%;" />
+				value="<?php echo $instance['title']; ?>" style="width:100%;" /><br/>			
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'categories' ); ?>"><?php _e( "Categories", 'absc' ); ?>:</label><br/>
@@ -171,6 +173,12 @@ class ABCategorySearch  extends WP_Widget {
 					<?php _e( 'OR', 'absc' ); ?>
 				</option>
 			</select><br/>
+			<label for="<?php echo $this->get_field_id( 'hide_op' ); ?>">
+				<?php _e( 'Hide Mode', 'absc' ); ?>
+			</label>
+			<input type="checkbox" name="<?php echo $this->get_field_name( 'hide_op' ); ?>" 
+				id="<?php echo $this->get_field_id( 'hide_op' ); ?>" 
+				<?php checked( 'on', $instance['hide_op'], true ); ?> />
 			<p style="text-align:justify">				
 				<small>
 					<?php _e( 'This option defines how the search works. If you choose AND it <br/>will be searched

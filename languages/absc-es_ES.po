@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: absc\n"
-"POT-Creation-Date: 2013-11-21 17:36-0300\n"
-"PO-Revision-Date: 2013-11-21 17:41-0300\n"
+"POT-Creation-Date: 2014-01-06 15:10-0300\n"
+"PO-Revision-Date: 2014-01-06 15:10-0300\n"
 "Last-Translator: Agustín Berasategui <ajberasategui@gmail.com>\n"
 "Language-Team: Agustin Berasategui\n"
 "MIME-Version: 1.0\n"
@@ -15,58 +15,62 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPath-1: .\n"
 
-#: ../ab-category-search.php:34 ../trunk/ab-category-search.php:33
+#: ../ab-category-search.php:34 ../trunk/ab-category-search.php:34
 msgid "AB Search Categories"
 msgstr "AB Búsqueda con Categorías"
 
-#: ../ab-category-search.php:36 ../trunk/ab-category-search.php:35
+#: ../ab-category-search.php:36 ../trunk/ab-category-search.php:36
 msgid "Adds a Search Form with category selectors"
 msgstr "Agrega un widget de búsqueda con selectores de categoría"
 
-#: ../ab-category-search.php:50
+#: ../ab-category-search.php:52 ../trunk/ab-category-search.php:52
 msgid "and"
 msgstr "y"
 
-#: ../ab-category-search.php:50
+#: ../ab-category-search.php:52 ../trunk/ab-category-search.php:52
 msgid "or"
 msgstr "o"
 
-#: ../ab-category-search.php:56 ../ab-category-search.php:57
-#: ../ab-category-search.php:58 ../ab-category-search.php:89
+#: ../ab-category-search.php:57 ../ab-category-search.php:58
+#: ../ab-category-search.php:59 ../ab-category-search.php:92
 #: ../trunk/ab-category-search.php:57 ../trunk/ab-category-search.php:58
-#: ../trunk/ab-category-search.php:59 ../trunk/ab-category-search.php:85
+#: ../trunk/ab-category-search.php:59 ../trunk/ab-category-search.php:92
 msgid "Search"
 msgstr "Buscar"
 
-#: ../ab-category-search.php:70 ../trunk/ab-category-search.php:66
+#: ../ab-category-search.php:73 ../trunk/ab-category-search.php:73
 msgid "All"
 msgstr "Todo"
 
-#: ../ab-category-search.php:140 ../trunk/ab-category-search.php:136
+#: ../ab-category-search.php:143 ../trunk/ab-category-search.php:143
 msgid "Title"
 msgstr "Título"
 
-#: ../ab-category-search.php:146 ../trunk/ab-category-search.php:142
+#: ../ab-category-search.php:149 ../trunk/ab-category-search.php:149
 msgid "Categories"
 msgstr "Categorías"
 
-#: ../ab-category-search.php:158 ../trunk/ab-category-search.php:154
+#: ../ab-category-search.php:161 ../trunk/ab-category-search.php:161
 msgid "Use ctrl (or cmd) + click to select multiple categories."
 msgstr "Usa ctrl (o cmd en MAC) + click para seleccionar más de una categoría."
 
-#: ../ab-category-search.php:162
+#: ../ab-category-search.php:165 ../trunk/ab-category-search.php:165
 msgid "Mode"
 msgstr "Modo"
 
-#: ../ab-category-search.php:167
+#: ../ab-category-search.php:170 ../trunk/ab-category-search.php:170
 msgid "AND"
 msgstr "Y"
 
-#: ../ab-category-search.php:170
+#: ../ab-category-search.php:173 ../trunk/ab-category-search.php:173
 msgid "OR"
 msgstr "O"
 
-#: ../ab-category-search.php:175
+#: ../ab-category-search.php:177 ../trunk/ab-category-search.php:177
+msgid "Hide Mode"
+msgstr "Ocultar Modo"
+
+#: ../ab-category-search.php:184 ../trunk/ab-category-search.php:184
 msgid ""
 "This option defines how the search works. If you choose AND it <br/>will be "
 "searched\n"
@@ -81,7 +85,7 @@ msgstr ""
 "\" la búsqueda incluirá aquellas<br/>entradas que pertenecen al menos a una "
 "de las categorías seleccionadas."
 
-#: ../ab-category-search.php:183
+#: ../ab-category-search.php:192 ../trunk/ab-category-search.php:192
 msgid ""
 "Please <b>notice</b> that when using \"and mode\" the search will be<br/>\n"
 "\t\t\tdone against posts which strictly belongs to selected categories in "
@@ -111,3 +115,11 @@ msgstr ""
 "generales<br/>\"Condición\" y \"Color\". Si una entrada pertenece por "
 "ejemplo a Blanco y Usada pero no está<br/>marcada como perteneciente a "
 "Condición y Color no aparecerá en el resultado."
+
+#: ../trunk/search.php:13
+msgid "Read More >>"
+msgstr "Leer Más >>"
+
+#: ../trunk/search.php:15
+msgid "Pages:"
+msgstr "Páginas:"
