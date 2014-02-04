@@ -5,7 +5,7 @@ Plugin Name: AB Categories Search Widget
 Plugin URI: 
 Description: Provides a Search Widget with the ability to add category selection filters.
 Author: Agustin Berasategui
-Version: 0.2.4
+Version: 0.2.5
 Author URI: ajberasategui.com.ar
 */
 /*
@@ -98,9 +98,10 @@ class ABCategorySearch  extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		foreach ( array('title', 'mode', 'hide_op' ) as $val ) {
+		foreach ( array('title', 'mode', 'hide_op', 'is_random_order' ) as $val ) {
 			$instance[$val] = strip_tags( $new_instance[$val] );
 		}
+		update_option( 'absc_rorder', $new_instance['is_random_order'] );
 		$cats = array();
 		foreach( $new_instance['categories'] as $cat ) {
 			$cat_split = split( '_', $cat );
@@ -159,6 +160,15 @@ class ABCategorySearch  extends WP_Widget {
 				<?php endforeach; ?>
 			</select><br/>
 			<small><?php _e( 'Use ctrl (or cmd) + click to select multiple categories.', 'absc' ); ?></small>			
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'is_random_order' ); ?>">
+				<?php _e( 'Random order', 'absc' ); ?>
+			</label>
+			<input type="checkbox" id="<?php echo $this->get_field_id( 'is_random_order' ); ?>" 
+				name="<?php echo $this->get_field_name( 'is_random_order' ); ?>" 
+				<?php checked( 'on', $instance['is_random_order'], true ); ?>/><br/>
+			<small><?php _e( 'Randomize found posts order.', 'absc' ); ?></small>
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'mode' ); ?>">
@@ -245,6 +255,9 @@ function abcs_search_request( $wp_query ) {
 		} else { // Mode is or
 			//set_query_var( 'category__in', $cats );
 			set_query_var( 'cat', implode( ',', $cats ) );
+		}
+		if ( 'on' == get_option( 'absc_rorder', 'off' ) ) { //if random order
+			set_query_var( 'orderby', 'rand' );
 		}
 	}
 	return $wp_query;
